@@ -2,4 +2,12 @@ import dis
 
 def cube(n):
     return n ** 3
+
 dis.dis(cube)
+
+
+#   3           RESUME                   0
+#   4           LOAD_FAST                0 (n)
+#               LOAD_CONST               1 (3)
+#               BINARY_OP                8 (**)
+#               RETURN_VALUE
