@@ -1,33 +1,24 @@
 #include <stdio.h>
 
-int main() 
-{
-    int count = 0;
-    int neededSum;
-    printf("Введите 'заданную' сумму: \n");
-    scanf("%d", &neededSum);
+int main() {
+    int count[28] = {0};
     
-    // Генерация всех шестизначных билетиков циклами, учитывая варианты с нулями, типа 000000
-    for (int a = 0; a < 10; a++) {
-        for (int b = 0; b < 10; b++) {
-            for (int c = 0; c < 10; c++) {
-                for (int d = 0; d < 10; d++) {
-                    for (int e = 0; e < 10; e++) {
-                        for (int f = 0; f < 10; f++) {
-                            int leftPart = a + b + c;
-                            int rightPart = d + e + f;
-                            
-                            if (leftPart == rightPart && leftPart == neededSum) {
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    // Считаем, сколько троек цифр имеют каждую сумму
+    for (int a = 0; a < 10; a++)
+        for (int b = 0; b < 10; b++)
+            for (int c = 0; c < 10; c++)
+                count[a + b + c]++; //увеличиваем на 1 значение ячейки массива под номером, равным сумме тройки
+    
+    int sum;
+    printf("Введите нужную вам сумму (сумма первых 3 чисел): ");
+    scanf("%d", &sum);
+    
+    if (sum < 0 || sum > 27) {
+        printf("Неккоректное число, такая сумма билетов невозможна, поэтому их колво - 0\n");
+    } else {
+        int res = count[sum]; //Берем значение из ячейки массива под нужным номером (равным сумме)
+        printf("%d\n", res * res);
     }
     
-    // Вывод числа билета с нужной суммой первых (или последних, они равны) чисел
-    printf("%d", count); 
     return 0;
 }
