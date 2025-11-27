@@ -1,54 +1,30 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-// Неполное частное от деления (назовем его q) a на b — это макс целое число, такое что q * b <= a
-int find_q(int a, int b) {
+int findQ(int a, int b) {
     if (b == 0) {
         printf("Нельзя делить на ноль!\n");
         return 0;
     }
-    
-    // Получаем значения a и b без знака минус, если он был
-    int abs_a = 0;
-    int abs_b = 0;
-    if (a < 0) {
-        abs_a = -1 * a;  
-    } else {
-        abs_a = a;
-    }
- 
-    if (b < 0) {
-        abs_b = -1 * b;  
-    } else {
-        abs_b = b;
-    }
-    
-    // Вычисляем q, проверяем через дополнительную переменную не пересекли ли мы значение а, если пересекли, то возвращаемся назад
     int q = 0;
-    int check = 0;
-    while (check <= abs_a) {
+    while ((q + 1) * abs(b) <= abs(a)) {
         q++;
-        check = q * abs_b;
     }
-    q = q - 1;
-    
-    // Добавляем знак минус к q, если а ИЛИ b был отрицательным
-    int sign = 1;
+    // Определяем знак
     if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
-        sign = -1;
+        return -q;
     }
-    return sign * q;
+    return q;
 }
 
-int main() 
-{
+int main() {
     int a, b;
-    
     printf("Введите два целых числа a и b: \n");
     scanf("%d %d", &a, &b);
     
-    int q = find_q(a, b);
+    int q = findQ(a, b);
     if (b != 0) {
-        printf("Неполное частное от деления: %d\n", q); //Снова делаем проверку на 0, чтобы надпись не вылетела лишняя
+        printf("Неполное частное от деления: %d\n", q);
     }
     return 0;
 }
