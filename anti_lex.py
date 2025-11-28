@@ -1,28 +1,15 @@
-str1 = input("Введите первую строку: ")
-str2 = input("Введите вторую строку: ")
+s1 = input('Введите первую строку: ')
+s2 = input('Введите вторую строку: ')
 
-def anti_lex(str1, str2):
-    min_len = min(len(str1), len(str2))
+# Если s1 > s2, то по обратному лексиграфическому порядку будет выведено 2
+# Если s2 > s1, то по обратному лексиграфическому порядку будет выведено 1
+# Если равны, то 0
+def reverse_lexicographic(s1, s2):
+    if s1 < s2:
+        return 2 # Выводим противоположный результат, так как у нас обратный порядок
+    elif s1 > s2:
+        return 1 # Выводим противоположный результат, так как у нас обратный порядок
+    else:
+        return 0
 
-    if len(str1) != len(str2):
-        if len(str1) < len(str2):
-            return -1
-        else:
-            return 1
-
-    for i in range(min_len):
-        if str1[i] != str2[i]:
-            if str1[i] > str2[i]:
-                return -1
-            else:
-                return 1
-    return 0
-
-result = anti_lex(str1, str2)
-
-if result == -1:
-    print(f"'{str1}' идет перед '{str2}'")
-elif result == 1:
-    print(f"'{str2}' идет перед '{str1}'")
-else:
-    print("Строки одинаковы")
+print(reverse_lexicographic(s1, s2))
