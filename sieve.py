@@ -1,21 +1,22 @@
 def sieve(n):
-    if n < 2:
-        return []
-
-    primes = [2]
-
-    for num in range(3, n + 1, 2):
-        limit = int(num ** 0.5) + 1
-        for p in primes:
-            if p > limit:
-                primes.append(num)
-                break
-            if num % p == 0:
-                break
-        else:
-            primes.append(num)
+    is_prime = [True] * (n + 1)
+    # Числа 0 и 1 не простые по определению просого
+    is_prime[0] = False
+    is_prime[1] = False
+    
+    for num in range(2, int(n ** 0.5) + 1):
+        if is_prime[num]:
+            for x in range(num * num, n + 1, num):
+                is_prime[x] = False
+                
+    primes = []
+    for i in range(n + 1):
+        if is_prime[i]:
+            primes.append(i)
     return primes
 
-n = int(input("Введите n (до которого хотите увидеть числа): "))
-result = sieve(n)
-print(f"Простые числа до n: {result}")
+
+# Пример использования с n = 30
+n = 30
+primes = sieve(n)
+print("Простые числа до", n, ":", primes)
