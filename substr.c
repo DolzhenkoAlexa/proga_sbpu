@@ -1,40 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
-// Функция проверки подстроки
-int checkSub(char str[], char substr[]) 
+int main() 
 {
-    int result = 0;
-    for (int i = 0; str[i] != '\0'; i++) { // Проходим по каждому элементу str
-        int found = 1; // Создаем "флаг", по которому будем определять надо ли прибавлять 1 к result
-        for (int j = 0; substr[j] != '\0'; j++) { // Проходим по каждому элементу substr
-            if (str[i+j] != substr[j]) { // Если элементы не совпадают, то обнуляем флаг
-                found = 0;
-                break;
-            }
-        }
-        if (found == 1) {
-            result++;
-        }
-    }
-    return result;
-}
-
-
-int main(void) 
-{
-    printf("Введите строку\n");
     char str[512];
-    fgets(str, sizeof(str), stdin);
-    str[strlen(str) - 1] = '\0'; // удаляем последний элемент (по индексу), который в fgets является \n
-
-    printf("Введите подстроку\n");
     char substr[512];
+    
+    printf("Введите строку: \n");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';  
+    // Удаляем символ новой строки
+    // Потому что fgets() включает символ новой строки в считанную строку
+    
+    printf("Введите подстроку: \n");
     fgets(substr, sizeof(substr), stdin);
-    substr[strlen(substr) - 1] = '\0';
-
-    int result = checkSub(str, substr);
-    printf("%d", result);
-
+    substr[strcspn(substr, "\n")] = '\0';
+    
+    int count = 0;
+    int pos = 0;
+    while (strstr(str + pos, substr)) {
+        count++;
+        pos++;
+    }
+    
+    printf("%d\n", count);
     return 0;
 }
