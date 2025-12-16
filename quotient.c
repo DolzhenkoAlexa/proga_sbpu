@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int findQ(int a, int b)
+int findQuotient(int a, int b)
 {
     if (b == 0) {
         printf("Нельзя делить на ноль!\n");
@@ -13,8 +13,7 @@ int findQ(int a, int b)
         q++;
     }
     
-    // Определяем знак
-    if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+    if (a * b < 0) {
         return -q;
     }
     return q;
@@ -23,13 +22,13 @@ int findQ(int a, int b)
 int main()
 {
     int a, b;
-    
-    printf("Введите два целых числа a и b: \n");
+    printf("Введите два целых a и b, чтобы найти q (a = b*q): \n");
     scanf("%d %d", &a, &b);
     
-    int q = findQ(a, b);
+    int q = findQuotient(a, b);
     if (b != 0) {
-        printf("Неполное частное от деления: %d\n", q);
+        printf("Неполное частное от деления q: %d\n", q);
     }
     return 0;
 }
+
