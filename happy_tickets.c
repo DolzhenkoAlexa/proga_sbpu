@@ -19,7 +19,8 @@ int main()
         // 27 потому что максимум 9+9+9=27
         result = result + (count[sum] * count[sum]);
     }
-    printf(result);
+    printf("Общее количество счастливых билетов со всеми суммами: %d\n", result);
     return 0;
 }
+
 
